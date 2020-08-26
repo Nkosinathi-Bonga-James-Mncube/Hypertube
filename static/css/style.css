@@ -1,0 +1,28 @@
+ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;   
+}
+li {
+    display: inline;
+}
+.login {
+    margin: auto;
+    text-align: center;
+}
+.register {
+    margin: auto;
+    text-align: center;
+}
+.home{
+    margin: auto;
+    text-align: center;
+}
+.library{
+    margin: auto;
+    text-align: center;
+}
+.update{
+    margin: auto;
+    text-align: center;
+}

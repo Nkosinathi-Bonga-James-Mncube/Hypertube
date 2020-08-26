@@ -1,0 +1,23 @@
+
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home page</title>
+    <meta name="description" content="Hypertube">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  </head>
+  
+  <body>
+    <div class="home">
+
+      {% include 'navibar.html' %}
+      <p>Welcome {{request.user}}</p>
+      <h1> Hypertube </h1>
+    </div>
+ 
+     
+  <!-- <script src="js/scripts.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login page</title>
+  <meta name="description" content="Hypertube">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> 
+</head>
+
+<body>
+  <div class="login">
+    <h1> Please login </h1>
+    <form>
+      Username:<input type="text" name="user_login"><br>
+      Password:<input type="text" name="pass_login"><br>
+      <button>Enter</button><br>
+      <a href="/register">Create user</a><br>
+    </form>
+    <footer>
+    <p>Hyperlink project 2020</p>
+  </footer>
+</div>
+  <!-- <script src="js/scripts.js"></script> -->
+</body>
+</html>
