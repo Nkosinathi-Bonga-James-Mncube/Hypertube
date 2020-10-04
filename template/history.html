@@ -1,0 +1,33 @@
+
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>History</title>
+    <meta name="description" content="Hypertube">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  </head>
+  
+  <body>
+    <div class="home">
+
+      {% include 'navibar.html' %}
+      <h1> History</h1>
+      <p> This is what you have been watching </p>
+      <div class="row">
+        {% for log in history_log%}
+        <div class="column">
+          <p>{{log.title}}</p>
+          <img id ="history_poster"  src="{{log.poster}}" value="">
+          <p>{{log.year}}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+ 
+  <script>
+  </script>
+  <!-- <script src="js/scripts.js"></script> -->
+</body>
+</html>

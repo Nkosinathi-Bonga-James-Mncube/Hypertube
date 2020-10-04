@@ -1,0 +1,48 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home page</title>
+    <meta name="description" content="Hypertube">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  </head>
+  
+  <body>
+    <div class="home">
+      {% include 'navibar.html' %}
+      <h1> Search user </h1>
+      <p>Please select user </p>
+      <form method="POST">{% csrf_token %}
+        <input type="text"  id="search_box" name="search_element" placeholder="Search user..">
+        <button onclick="find_user()">Find</button>
+      </form>
+            {% for k in found %}
+                <img id="profile_pic" src="{{ k.user_profile.picture.url }}" width="140" height="140">
+                <p>{{k.username}}</p>
+                <p>Previouly watching:</p>
+                    {%for k in history_search%}
+                    <p id= "search_tile">{{ k.title }} ({{ k.year }})</p>
+                        <img id="title_img" src="{{k.poster}}" value="" height="52px" width="52px">
+                    {% endfor %}
+            {% empty %}
+                <p id="Found_tag">Not found</p>
+            {% endfor %}
+    </div>
+ 
+     
+  <script>
+      function find_user()
+      {
+        user_search=document.getElementsByName("search_element").value
+        $.ajax({
+                url:'/search/',
+                method:"POST",
+                data:{
+                        csrfmiddlewaretoken: "{{ csrf_token }}",
+                        user_search}})
+      }
+ </script>
+</body>
+</html>

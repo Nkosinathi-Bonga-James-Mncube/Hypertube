@@ -1,0 +1,198 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stream video</title>
+    <meta name="description" content="Hypertube">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+  </head>
+  
+  <body>
+    <div class="update">
+      {% include 'navibar.html' %}
+      <div id="details">
+        <h id="media_title">Test1</h><br>
+        <h>Year:</h><h id="media_year"></h><br>
+      </div>
+      <h>Director:</h><h id="director"></h><br>
+      <h>Actors:</h><h id="actors"></h><br>
+      <h>IMDB Rating:</h><h id="rating"></h><br>
+      <h>Plot:</h><div class="details" id="plot"></div><br>
+      <p>---<p>
+      <video id="video_source" controls type="video/mp4"width="1280px" height="720px" preload="none">
+        <!-- <track label="English" kind="subtitles" srclang="en" src="/static/sintel-en.vtt" default> -->
+      </video><br>
+        <textarea id="user_post" name="user_post1" placeholder="Enter post"></textarea><br>
+        <button onclick="update_comments()">Submit</button>
+          {% for people in user1%}
+            <!-- {{ people.username}} -->
+              <!-- {% if people.username == request.user.username %} -->
+                  <!-- <p> {{people.user_profile.picture.url}}</p> -->
+                  <!-- <p>yeah</p> -->
+              <!-- {% else %} -->
+
+               <!-- <p>Not found</p> -->
+              <!-- {% endif %} -->
+          {% endfor %}
+      <p>{{message}}</p>
+      <div id ="Chat_messages">
+        <p>--------------<p> 
+          {% for k in comment%}
+            {% if k.title == 'Batman Begins'%}
+          <p>{{ k.user }}-{{ k.date }}</p> 
+          <p>{{ k.post }}</p> 
+           <p>--------------<p> 
+             {%endif%}
+           {% endfor %}
+      </div> 
+    </div>
+     
+  <script src="{% static 'js/test.js' %}"></script>
+  <script>
+  function update_comments()
+  {
+    var data_rec = JSON.parse(localStorage.getItem("test"))
+    var num =new URL(window.location.href)
+    var value=num.searchParams.get("mov_id")
+    post_value=document.getElementById("user_post").value
+    title=data_rec[value]['Title']
+    $.ajax({
+    url:'/post_comment/',
+    method:"POST",
+    data:{
+           csrfmiddlewaretoken: "{{ csrf_token }}",
+           post_value,
+           title},
+   success:function(data){
+           console.log(data)
+           }});
+    $("#Chat_messages").load(window.location.href + " #Chat_messages" )
+  }
+
+  function show_details()
+  {
+    var num =new URL(window.location.href)
+    var value=num.searchParams.get("mov_id")
+    var data_rec = JSON.parse(localStorage.getItem("test"))
+    var movie_details = JSON.parse(localStorage.getItem("Movie_details")) 
+    document.getElementById("plot").innerHTML=movie_details
+    document.getElementById("media_title").innerHTML=data_rec[value]['Title']
+    document.getElementById("media_year").innerHTML=data_rec[value]['Year']
+    document.getElementById("plot").innerHTML=movie_details.plot
+    document.getElementById("rating").innerHTML=movie_details.rating
+    document.getElementById("director").innerHTML=movie_details.director
+    document.getElementById("actors").innerHTML=movie_details.actors
+    details= document.getElementById("details")
+    poster=document.createElement('img')
+    poster.src=data_rec[value]['Poster']
+    poster.setAttribute("width",200)
+    poster.setAttribute("width",200)
+    poster.setAttribute("id","img_1")
+    details.append(poster)
+  }
+  function start_1()
+  {
+   var movie_details = JSON.parse(localStorage.getItem("Movie_details"))
+   title1 = movie_details.title
+   user1 = "{{ user }}"
+   poster1=movie_details.poster
+   imdb1=movie_details.imdb
+   plot1=movie_details.plot
+   year1=movie_details.year
+   actors1=movie_details.actors
+   director1=movie_details.director
+   rating1=movie_details.rating
+   type1=movie_details.media
+   var values = {
+         'str': title1,
+         'id': user1};
+    // $.ajax({
+    //  url:'/torrent_view/',
+    //  method:"POST",
+    //  data:{
+            // csrfmiddlewaretoken: "{{ csrf_token }}",
+            // imdb1,
+            // title1,
+            // type1,},
+    // success:function(data){
+            // console.log(data)
+            // vid_2=document.getElementById("video_source")
+            // vid_2.setAttribute('src','/'+data)
+            // }});
+
+  }
+  function current_time()
+  {
+    var vid_1 = document.getElementById("video_source")
+    console.log(vid_1.timeupdate)
+  }
+  function video_player ()
+  {
+    var vid_1 = document.getElementById("video_source")
+    document.getElementById("video_source").addEventListener("play", check_1);
+
+    function check_1()
+    {
+      console.log("Play has been pressed!")
+
+      document.getElementById("video_source").removeEventListener("play", check_1)
+      var movie_details = JSON.parse(localStorage.getItem("Movie_details"))
+      title1 = movie_details.title
+      user1 = "{{ user }}"
+      poster1=movie_details.poster
+      imdb1=movie_details.imdb
+      plot1=movie_details.plot
+      year1=movie_details.year
+      actors1=movie_details.actors
+      director1=movie_details.director
+      rating1=movie_details.rating
+      type1=movie_details.media
+      var values = {
+            'str': title1,
+            'id': user1
+    };
+      $.ajax({
+          url:'/history/',
+          method:"POST",
+          data:{
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            title1,
+            poster1,
+            imdb1,
+            plot1,
+            year1,
+            actors1,
+            director1,
+            rating1,
+          }
+      });
+
+      $.ajax({
+        url:'/torrent_view/',
+        method:"POST",
+      data:{
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        imdb1,
+        title1,
+        type1,
+    },
+    success:function(data)
+    {
+      console.log(data)
+      document.getElementById("video_source").setAttribute("src",'/'+data)
+    }
+    });
+
+
+
+    };
+  }
+  start_1()
+  show_details()
+  video_player()
+  //remove_event()
+  </script>
+</body>
+</html>

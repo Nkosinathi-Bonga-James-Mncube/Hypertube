@@ -2,19 +2,17 @@
 <!doctype html>
 <html>
   <head>
+    <title>{% block head_title %}{% endblock head_title %}</title>
     <meta charset="utf-8">
     <meta name="description" content="Hypertube">
   </head>
   
   <body>
-      <!-- <ul> -->
-          <!-- <li><a href="/home">Home</a></li> -->
-          <!-- <li><a href="/library">Library</a></li> -->
-          <!-- <li><a href="/update">Update</a></li> -->
-          <!-- <li><a href="/">Logout</a></li>    -->
-      <!-- </ul> -->
-      <!-- <button onclick="location.href='/'" type="button">Logout</button><br> -->
-     
-  <!-- <script src="js/scripts.js"></script> -->
+    {% block body %}
+    {% block content %}
+    {% endblock content %}
+    {% endblock body %}
+    {% block extra_body %}
+    {% endblock extra_body %}
 </body>
 </html>

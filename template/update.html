@@ -12,7 +12,18 @@
   <body>
     <div class="update">
       {% include 'navibar.html' %}
-      <h1> Update page </h1>
+      {% if message%}
+      <p>{{message}}<p>
+      {% else %}
+        <h1> Update page </h1>
+      <form action="/update/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+      <p>{{ form.as_p }}<p>
+        <p>{{ form2.as_p }}<p></p>
+        <a href="/reset_password">Rest password</a><br><br>
+        <input type='submit' value='Update Details'/>
+        {% endif %}
+      <button onclick="location.href='/home'" type="button">Back</button>
+      </form>
     </div>
      
   <!-- <script src="js/scripts.js"></script> -->
