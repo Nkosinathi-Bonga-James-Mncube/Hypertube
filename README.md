@@ -2,6 +2,7 @@
 Instructions
 
 1 - Rename env.examples to .env and fill in neccessary details: (Remember no spaces between after "=")
+
     EMAIL_HOST= // Email host eg.smtp.gmail.com
     EMAIL_HOST_USER=// Email address example@gmail.com 
     EMAIL_HOST_PASSWORD=//Email password
