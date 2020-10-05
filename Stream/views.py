@@ -67,7 +67,6 @@ def torrent_view(request):
     BASE_DIR = Path(__file__).resolve().parent.parent
     d_path  = os.path.join(BASE_DIR, 'static/folder/')
     print("Location : " ,qb.get_default_save_path())
-    print("The imdb is : " , request.POST['imdb1'])
     if request.method == 'POST':
         ezflix = Ezflix(query=request.POST['title1'], media_type='movie', quality='720p',limit=1)
         shows = ezflix.search()

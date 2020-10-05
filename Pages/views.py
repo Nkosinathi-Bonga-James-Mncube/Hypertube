@@ -12,6 +12,7 @@ from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from decouple import config
 from rest_framework.authtoken.models import Token
+from Profile.models import History
 # from .forms import UpdateForm
 
 
@@ -51,7 +52,13 @@ def logout_view(request):
 
 @login_required(login_url='/')
 def library_view(request,*args,**kwargs):
-        return render(request,"library.html",{'API':config('API_KEY_IMDB') })
+        history= History.objects.filter(user=request.user)
+        context = {
+            "history":history,
+            'API':config('API_KEY_IMDB'),
+            'API_2':config('API_KEY_THEMOVIEDB'),
+            }
+        return render(request,"library.html",context)
 
 def activation_view(request,user1,token1):
     try:

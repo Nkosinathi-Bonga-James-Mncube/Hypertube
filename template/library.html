@@ -10,34 +10,12 @@
 </head>
 
 <body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="library">
   {% include 'navibar.html' %}
   <h1> Library </h1>
+  <!-- <p>{% for k in history%}</p> -->
+  <!-- <p>{{k.imdb}}</p> -->
+  <!-- <p>{% endfor%}</p> -->
   <form id="check_input">
     Search:<input id="search_video" type="text" name="search">
     <button onclick="get_clear()" type="tag">Clear</button>
@@ -66,14 +44,6 @@
       <img id="top_5_img" class ="img_next" width="120px" height="140px">
   
   </div>
-
-
-
-
-
-
-
-
 
   <div id="div1"></div>
   </div>
@@ -189,7 +159,8 @@
     }
     async function Top_movies(){
       var API_IMDB ="{{ API }}"
-      const api_3='https://api.themoviedb.org/3/movie/popular?api_key=a472ce9d2285c33aefe4bc8542170b73&language=en-US&page=1'
+      var API_KEY_THEMOVIEDB = "{{ API_2 }}"
+      const api_3='https://api.themoviedb.org/3/movie/popular?api_key='+API_KEY_THEMOVIEDB+'&language=en-US&page=1'
       const Response2= await fetch(api_3)
       const data_3 = await Response2.json()
       title_name = [
