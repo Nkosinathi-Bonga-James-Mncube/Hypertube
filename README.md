@@ -9,6 +9,7 @@ Instructions
     SOCIAL_AUTH_GOOGLE_OAUTH_KEY=//Provide code from https://console.developers.google.com/apis/credentials
     SOCIAL_AUTH_GOOGLE_OAUTH_SECRET=Provide api code from https://console.developers.google.com/apis/credentials
     SECRET_KEY=//Provide own Django secret key from settings.py new project created
+    
+2 - To run torrent client run "sudo qbittorrent-nox"
 
 
-2 - 
