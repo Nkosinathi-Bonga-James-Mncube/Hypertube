@@ -1,4 +1,10 @@
 # Hypertube
+What is  Hypertube?
+
+
+Hypertube is a web application that allows the user to research and watch videos.The player will be directly integrated to the site, and the videos will be downloaded through the BitTorrent protocol.
+
+
 Instructions
 
 1 - Rename env.examples to .env and fill in neccessary details: (Remember no spaces after "=")
